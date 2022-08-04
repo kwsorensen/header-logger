@@ -8,8 +8,14 @@ import (
 )
 
 func headerLogger(w http.ResponseWriter, r *http.Request) {
+	var headerString string
+	for k, v := range r.Header {
+		for _, i := range v {
+			headerString += fmt.Sprintf("[%s:%s] ", k, i)
+		}
+	}
 
-	fmt.Println("HEADER: ", r.Header)
+	log.Info("HEADERS: ", headerString)
 
 }
 
